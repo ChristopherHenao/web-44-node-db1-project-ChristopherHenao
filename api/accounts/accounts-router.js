@@ -1,7 +1,15 @@
 const router = require('express').Router()
+const Accounts = require('./accounts-model')
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   // DO YOUR MAGIC
+  try {
+    const budgets = await Accounts.getAll()
+    res.json(budgets)
+  }
+  catch {
+    res.status(500)
+  }
 })
 
 router.get('/:id', (req, res, next) => {
